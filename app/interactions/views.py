@@ -1,7 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
-
 from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework import status
 from rest_framework.response import Response
@@ -31,7 +27,7 @@ class UploadViewSet(ViewSet):
                 status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
             )
         new_int_file = LLMFile.objects.create(file=file_uploaded)
-        read_interactions(new_int_file.id)
+        read_interactions.delay(new_int_file.id)
         return Response(
             {
                 "success": True,
