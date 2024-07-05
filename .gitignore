@@ -98,4 +98,6 @@ app/data/
 
 
 /env
-/venv
+/v
+
+*/.sqlite3
