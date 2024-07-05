@@ -16,7 +16,7 @@ server-down:
 	docker compose down
 
 build-server:
-	docker compose down
+	docker compose down -v
 	docker compose build
 
 update-deps-server:

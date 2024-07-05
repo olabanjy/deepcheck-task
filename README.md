@@ -45,11 +45,6 @@ This will generate secrets (`.env` file) for the local instances,
 
 Open your browser and access the `APP_URL` entry in `.env` file.
 
-The default credentials are defined here.
-
-- admin user: `admin`
-- password: `password` (check `ADMIN_PASSWORD` entry in `.env` file).
-
 ### Start the server
 
 Run in project directory:
@@ -59,8 +54,6 @@ docker compose up app
 ```
 
 This will start the application behind NGINX along with all dependencies.
-
-The app should be reachable at `APP_URL` value, `http://lomis-loyverse.local`.
 
 ### Upgrade dependencies
 
@@ -72,11 +65,6 @@ docker compose run --rm --no-deps app eval pip list --outdated
 
 **WARNING** Update or add a new dependency implies to rebuild the container
 to catch up the new version or the new library.
-
-## Credit
-
-Brought to you by [eHealth Africa](http://ehealthafrica.org/)
-— _good tech for hard places_.
 
 ## License
 
