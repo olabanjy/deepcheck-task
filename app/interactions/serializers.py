@@ -17,6 +17,8 @@ class InteractionSerializers(ModelSerializer):
 
 
 class AlertSerializers(ModelSerializer):
+    llm = InteractionSerializers()
+
     class Meta:
         model = Alert
         fields = "__all__"

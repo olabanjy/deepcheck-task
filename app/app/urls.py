@@ -19,36 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularRedocView,
-    SpectacularSwaggerView,
-)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
     path("interactions", include("interactions.urls")),
-    path(
-        route="",
-        view=SpectacularSwaggerView.as_view(url_name="schema"),
-        name="index",
-    ),
-    path(
-        route="schema/",
-        view=SpectacularAPIView.as_view(),
-        name="schema",
-    ),
-    path(
-        route="schema/ui/",
-        view=SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
-    path(
-        route="schema/redoc/",
-        view=SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
-    ),
 ]
 
 

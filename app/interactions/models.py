@@ -14,8 +14,8 @@ class LLMInteraction(models.Model):
     input_data = models.TextField(verbose_name=_('input_data'))
     output_data = models.TextField(verbose_name=_('output_data'))
 
-    input_metric = models.IntegerField(verbose_name=_('input_metric'))
-    output_metric = models.IntegerField(verbose_name=_('output_metric'))
+    input_metric = models.IntegerField(verbose_name=_('input_metric'), default=0)
+    output_metric = models.IntegerField(verbose_name=_('output_metric'), default=0)
 
     def save(self, *args, **kwargs):
         self.create_alerts()

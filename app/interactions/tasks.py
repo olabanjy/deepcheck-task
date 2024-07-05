@@ -18,7 +18,7 @@ from django.db import transaction
 #     assignment.save()
 
 
-@shared_task()
+# @shared_task()
 def read_interactions(file_id):
     file_data = LLMFile.objects.get(pk=file_id)
     file = file_data.file.read().decode('utf-8')
@@ -29,15 +29,19 @@ def read_interactions(file_id):
         print("input", input, "output", output)
         interaction, _ = LLMInteraction.objects.get_or_create(input_data=input, output_data=output)
         with transaction.atomic():
-            transaction.on_commit(lambda: calculate_metrics.delay(interaction.id))
-        os.remove(file_data.file.url)
+            # transaction.on_commit(lambda: calculate_metrics.delay(interaction.id))
+            transaction.on_commit(lambda: calculate_metrics(interaction.id))
+        try:
+            os.remove(file_data.file.path)
+        except OSError:
+            pass
 
 
-@shared_task()
+# @shared_task()
 def calculate_metrics(param_id):
 
     interaction = LLMInteraction.objects.get(pk=param_id)
     interaction.input_metric = len(interaction.input_data)
-    interaction.output_data = len(interaction.output_data)
+    interaction.output_metric = len(interaction.output_data)
 
     interaction.save()
