@@ -19,9 +19,7 @@ build-server:
 	docker compose down -v
 	docker compose build
 
-update-deps-server:
-	docker compose run --rm --no-deps web pip_freeze
-	docker compose build app
+
 
 lint:
 	pre-commit run --all-files

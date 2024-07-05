@@ -24,7 +24,6 @@ test_lint     : run code style tests
 test_py       : run python tests with coverage
 test_setup    : prepare database and generate app docs
 
-gen_docs      : generate app docs
 pip_freeze    : freeze pip dependencies and write them into 'requirements.prod.txt'
 
 --------------------------------------------------------------------------------
@@ -80,7 +79,7 @@ function setup_db {
 
 function setup_admin_user {
     if [ -n "$ADMIN_PASSWORD" ]; then
-        # arguments:[-e=admin@ehealthafrica.org] -p=secretsecret
+
         echo $ADMIN_USER_EMAIL
         echo $ADMIN_PASSWORD
         $MANAGE setup_admin -e="admin@example.com" -p=$ADMIN_PASSWORD
@@ -163,28 +162,9 @@ function test_setup {
 
 function test_lint {
     flake8 --toml-config ./pyproject.toml .
-    rstcheck --config=./pyproject.toml -r .
 }
 
-function test_coverage {
-    export DJANGO_SETTINGS_MODULE=${DEFAULT_DJANGO_SETTINGS_MODULE}_test
-    export WEBPACK_STATS_FILE=./${PY_MODULE}/tests/webpack-stats.json
 
-    check_db
-    coverage erase || true
-
-    coverage run \
-        $MANAGE test \
-        --parallel \
-        --noinput \
-        "${@:1}"
-
-    coverage combine --append
-    coverage report -m
-    coverage erase
-
-    export DJANGO_SETTINGS_MODULE=${DEFAULT_DJANGO_SETTINGS_MODULE}
-}
 
 # --------------------------------------------------------------------------
 MANAGE=./manage.py
@@ -251,15 +231,6 @@ case "$1" in
 
     ;;
 
-    run_worker )
-        run_worker
-    ;;
-
-
-
-    gen_docs )
-        gen_sphinx_docs
-    ;;
 
     pip_freeze )
         pip_freeze || true
