@@ -68,7 +68,7 @@ to catch up the new version or the new library.
 
 ## License
 
-> **Copyright 2023 eHealthAfrica**
+> **Copyright 2023 Savana Tech**
 
 [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
 

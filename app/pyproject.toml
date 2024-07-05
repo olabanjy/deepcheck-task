@@ -1,9 +1,9 @@
 [project]
-name = 'elev8'
-description = 'LoMIS Loyverse App'
+name = 'deepchec'
+description = 'Deepcheck Task'
 keywords = []
 authors = [
-  'eHA <admin@ehealthafrica.org>',
+  'eHA <admin@example.com>',
 ]
 
 license = 'Apache.2.0'
